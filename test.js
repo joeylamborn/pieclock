@@ -1,8 +1,14 @@
+var minute_state;
 function setup() {
   createCanvas(400, 400);
+  minute_state = minute();
 }
 
 function draw() {
+  if (minute_state != minute()) {
+    console.log("New minute: ", minute());
+    minute_state = minute();
+  }
   background(220);
   fill(0, 122, 10, 100);
 
@@ -23,8 +29,6 @@ function draw() {
   var hour_angle = TWO_PI * (hour() / 24);
   var minute_angle = TWO_PI * (minute() / 60);
   var second_angle = TWO_PI * (second() / 60);
-
-  console.log("current hour:", hour());
 
   arc(150, 150, 280, 280, 3 * HALF_PI, hour_angle - HALF_PI);
 
