@@ -5,12 +5,12 @@ function setup() {
 }
 
 function draw() {
+  // check if new minute
   if (minute_state != minute()) {
     console.log("New minute: ", minute());
     minute_state = minute();
   }
   background(220);
-  fill(0, 122, 10, 100);
 
   /*
 
@@ -27,14 +27,30 @@ function draw() {
   */
 
   var hour_angle = TWO_PI * (hour() / 24);
-  var minute_angle = TWO_PI * (minute() / 60);
-  var second_angle = TWO_PI * (second() / 60);
+  var minute_angle = TWO_PI * ((minute() + 1) / 60);
+  var second_angle = TWO_PI * ((second() + 1) / 60);
+
+  var hour_offset = (PI / 12) * (minute_angle / TWO_PI); // extends the hour angle by a bit based on how far into the hour we are
+
+  hour_angle = hour_angle + hour_offset; // add offset
+
+  line(150, 150, 150, 10);
+
+  fill(0, 0, 0, 0);
+  circle(150, 150, 280);
+
+  fill(255, 0, 0, 100);
 
   arc(150, 150, 280, 280, 3 * HALF_PI, hour_angle - HALF_PI);
 
-  fill(0, 122, 10, 50);
+  fill(0, 0, 0, 0);
+  circle(150, 150, 150);
+
+  fill(0, 255, 0, 100);
   arc(150, 150, 150, 150, 3 * HALF_PI, minute_angle - HALF_PI);
 
-  fill(0, 122, 10, 50);
+  fill(0, 0, 0, 0);
+  circle(150, 150, 25);
+  fill(0, 0, 255, 100);
   arc(150, 150, 25, 25, 3 * HALF_PI, second_angle - HALF_PI);
 }
